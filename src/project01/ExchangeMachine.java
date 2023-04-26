@@ -38,7 +38,6 @@ public class ExchangeMachine {
                 continue;
             }
 
-
             input.trim();
             String[] token = input.split(" ");
             if (token.length == 0) {
