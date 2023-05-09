@@ -22,6 +22,8 @@ jdk-18.0.1.1
 //2. 발생할 수 있는 상황들에 대한 테스트 케이스가 필요합니다.
 //        각 케이스 별 고객의 입력과 개발자가 예상하는 결과를 이용하여 모든 테스트를 통과해야 합니다.
 
+import java.util.Set;
+
 public class Main {
     public static void main(String[] args) {
         /*
@@ -123,8 +125,11 @@ public class Main {
                각 케이스 별 고객의 입력과 개발자가 예상하는 결과를 이용하여 모든 테스트를 통과해야 합니다.
         */
 
-        ExchangeMachine exchangeMachine = new ExchangeMachine("src/project01/productCode.txt");
-//        ExchangeMachine exchangeMachine = new ExchangeMachine("src/project01/ErrorProductCode.txt");
+        Admin admin = new Admin();
+        admin.inputProductCodes();
+        Set<String> productCodes = admin.getProductCodes();
+
+        ExchangeMachine exchangeMachine = new ExchangeMachine(productCodes);
         exchangeMachine.run();
     }
 }
