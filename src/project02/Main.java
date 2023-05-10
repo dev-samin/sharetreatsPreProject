@@ -54,10 +54,15 @@ package project02;
     각 케이스 별 고객의 입력과 개발자가 예상하는 결과를 이용하여 모든 테스트를 통과해야 합니다.
 * */
 
+import java.util.LinkedList;
+
 public class Main {
     public static void main(String[] args) {
+        Admin admin = new Admin();
+        admin.inputProductCodes();
+        LinkedList<Product> products = admin.getProducts();
 
-        PoachingMachine poachingMachine = new PoachingMachine("src/project02/productCode.txt");
+        PoachingMachine poachingMachine = new PoachingMachine(products);
         poachingMachine.run();
     }
 }
