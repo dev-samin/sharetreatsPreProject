@@ -84,8 +84,9 @@ public class ExchangeMachine {
     }
 
     private void claim(String[] token) {
-        System.out.println("[------CLAIM------]");
         String storeCode = token[1];
+
+        System.out.println("[------CLAIM------]");
 
         if (storeCode.matches("[a-zA-Z]+") && storeCode.length() == 6) {
             for (int i = 2; i < token.length; i++) {
