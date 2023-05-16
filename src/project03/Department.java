@@ -7,17 +7,19 @@ public class Department {
     private int staffCount;
     private ArrayList<Department> subDepartments;
 
-    Department(int staffCount, String name) {
-        this.staffCount = staffCount;
+    private Department parentsDepartment;
+
+    Department(String name, int staffCount) {
         this.name = name;
+        this.staffCount = staffCount;
         subDepartments = new ArrayList<>();
     }
 
-    public int calTotalStaffCount() {
+    public int calSubStaffCount() {
         int totalStaffCount = staffCount;
         if (subDepartments.size() != 0) {
-            for (int i = 0; i < subDepartments.size(); i++) {
-                totalStaffCount += subDepartments.get(i).calTotalStaffCount();
+            for (Department subDepartment : subDepartments) {
+                totalStaffCount += subDepartment.calSubStaffCount();
             }
         }
         return totalStaffCount;
@@ -45,6 +47,14 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Department getParentsDepartment() {
+        return parentsDepartment;
+    }
+
+    public void setParentsDepartment(Department parentsDepartment) {
+        this.parentsDepartment = parentsDepartment;
     }
 }
 
