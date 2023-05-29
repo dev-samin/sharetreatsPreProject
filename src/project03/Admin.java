@@ -40,11 +40,15 @@ public class Admin {
             String[] token = line.split(", ");
             String departmentName = token[0];
             if (departments.containsKey(departmentName) == true) {
-                System.out.println("이미 존재하는 부서입니다");
+                System.out.println("이미 존재하는 부서입니다.");
                 continue;
             }
             try {
                 int staffCount = Integer.parseInt(token[1]);
+                if (staffCount > 1000) {
+                    System.out.println("0 ~ 1000명 이하의 인원만 입력해 주세요");
+                    continue;
+                }
                 departments.put(departmentName, new Department(departmentName, staffCount));
             } catch (NumberFormatException e) {
                 System.out.println("정수범위의 숫자만 입력해 주세요");
