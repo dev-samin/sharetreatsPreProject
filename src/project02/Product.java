@@ -1,9 +1,9 @@
 package project02;
 
 public class Product {
-    String type;
-    String grade;
-    String expirationDate;
+    private String type;
+    private String grade;
+    private String expirationDate;
 
     public Product(String type, String grade, String expirationDate){
         this.type = type;
