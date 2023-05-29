@@ -5,29 +5,55 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class PoachingMachine {
-    Customer customer;
     LinkedList<Product> products;
     LinkedList<Product> productTypeA;
     LinkedList<Product> productTypeB;
+    Customer customer;
 
     public PoachingMachine(LinkedList<Product> products) {
-        this.customer = new Customer();
         this.products = products;
         this.productTypeA = new LinkedList<>();
         this.productTypeB = new LinkedList<>();
+        this.customer = new Customer();
     }
 
     public void run() {
+        greeting();
         sortProductType();
-        help();
         command();
+    }
+    private void greeting() {
+        System.out.println("[빠칭코 상품 뽑기 서비스]");
+        System.out.println("명령어를 입력해주세요");
+        System.out.println();
+    }
+
+    private void help() {
+        System.out.println("[------HELP------]");
+        System.out.println("응모 : DRAW [시행횟수]");
+        System.out.println("충전 : INSERT");
+        System.out.println("종료 : EXIT");
+    }
+
+    private void sortProductType() {
+        for (Product product : products) {
+            if (product.getGrade().equals("A")) {
+                productTypeA.add(product);
+            }
+            if (product.getGrade().equals("B")) {
+                productTypeB.add(product);
+            }
+        }
     }
 
     private void command() {
-            Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("현재 전자 지갑에 남은 잔액은 " + customer.getWallet() + "원 입니다");
-            String[] token = scanner.nextLine().trim().split(" ");
+            System.out.println();
+            System.out.println("현재 남은 잔액은 " + customer.getWallet() + "원 입니다");
+            help();
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            String[] token = scanner.nextLine().trim().toUpperCase(Locale.ROOT).split(" ");
             String command = token[0];
             switch (command) {
                 case "DRAW" -> {
@@ -35,7 +61,6 @@ public class PoachingMachine {
                         System.out.println("시행 횟수를 입력해 주세요");
                         continue;
                     }
-                    LocalDateTime currentDateTime = LocalDateTime.now();
                     try {
                         int count = Integer.parseInt(token[1]);
                         draw(count, currentDateTime);
@@ -46,6 +71,7 @@ public class PoachingMachine {
                 case "INSERT" -> {
                     if (token.length != 2) {
                         System.out.println("충전 금액을 입력해 주세요");
+                        continue;
                     }
                     try {
                         int money = Integer.parseInt(token[1]);
@@ -63,79 +89,74 @@ public class PoachingMachine {
         }
     }
 
-    private void sortProductType() {
-        for (Product product : products) {
-            if (product.getGrade().equals("A")) {
-                System.out.println("A");
-                productTypeA.add(product);
-            } else if (product.getGrade().equals("B")) {
-                System.out.println("A");
-                productTypeB.add(product);
-            }
-        }
-    }
-
 
     private void draw(int count, LocalDateTime currentDateTime) {
-        Product product;
-
         for (int i = 0; i < count; i++) {
-            if (productTypeA.size() == 0 && productTypeB.size() == 0) {
-                System.out.println("재고가 부족합니다");
-                return;
-            }
-
             if (customer.insertCoin() == false) {
                 System.out.println("잔액이 부족합니다.");
                 return;
             }
 
-            if (pickGoods(90)) {
-                if (productTypeA.size() == 0) {
-                    System.out.println("재고가 부족합니다.");
-                    continue;
-                }
-                product = productTypeA.pop();
-                if (isExpired(product.getExpirationDate(), currentDateTime) == false) {
-                    System.out.println("유통기한이 지난 상품입니다 " + product.getExpirationDate());
-                    continue;
-                }
-                System.out.println(product.type + " 당첨 되었습니다,.");
+            if (productTypeA.size() == 0 && productTypeB.size() == 0) {
+                System.out.println("재고가 부족합니다");
+                refund();
+                return;
+            }
+
+            if (pickGoods(productTypeA, 90, currentDateTime) == true) {
                 continue;
             }
 
-            if (pickGoods(10)) {
-                if (productTypeB.size() == 0) {
-                    System.out.println("재고가 부족합니다.");
-                    continue;
-                }
-                product = productTypeB.pop();
-                if (isExpired(product.getExpirationDate(), currentDateTime) == false) {
-                    System.out.println("유통기한이 지난 상품입니다 " + product.getExpirationDate());
-                    continue;
-                }
-                System.out.println(product.type + " 당첨 되었습니다,.");
-            } else {
-                System.out.println("꽝 입니다");
+            if (customer.getProductTypeB().size() >= 3) {
+                System.out.println("B 상품은 최대 3번까지만 당첨 될수 있습니다.");
+                refund();
+                continue;
             }
+
+            if (pickGoods(productTypeB, 10, currentDateTime)) {
+                continue;
+            }
+            System.out.println("꽝 입니다");
         }
     }
 
-    private boolean isExpired(String date,LocalDateTime currentDateTime) {
+
+    private boolean pickGoods(LinkedList<Product> products, double probability, LocalDateTime currentDateTime) {
+        double num = new Random().nextDouble();
+
+        if (num < (probability / 100) == false) {
+            return false;
+        }
+
+        if (products.size() == 0) {
+            System.out.println("재고가 부족합니다. 100원을 환불해 드립니다.");
+            refund();
+            return true;
+        }
+
+        Product product = products.pop();
+        if (isExpired(product.getExpirationDate(), currentDateTime) == true) {
+            System.out.println("유통기한이 지난 상품입니다 " + product.getExpirationDate());
+            refund();
+            return true;
+        }
+
+        if (product.getType() == "A")
+            customer.getProductTypeA().add(product);
+        if (product.getType() == "B")
+            customer.getProductTypeB().add(product);
+        System.out.println(product.getType() + " 당첨 되었습니다.");
+        return true;
+    }
+
+    private boolean isExpired(String date, LocalDateTime currentDateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         LocalDateTime compareDateTime = LocalDateTime.parse(date, formatter);
 
-        if (currentDateTime.isAfter(compareDateTime)) {
-            System.out.println("비교할 날짜가 더 과거입니다.");
+        if (currentDateTime.isAfter (compareDateTime) == false) {
             return (false);
-        } else {
-            return (true);
         }
-    }
-
-    private boolean pickGoods(double probability) {
-        double num = new Random().nextDouble();
-        return (num < (probability / 100));
+        return (true);
     }
 
     private void chargeWallet(int money) {
@@ -143,10 +164,8 @@ public class PoachingMachine {
         customer.setWallet(currentWallet + money);
     }
 
-    private void help() {
-        System.out.println("[------HELP------]");
-        System.out.println("응모 : DRAW [시행횟수]");
-        System.out.println("충전 : INSERT");
-        System.out.println("종료 : EXIT");
+    private void refund() {
+        System.out.println(" 100원을 환불해 드립니다.");
+        chargeWallet(100);
     }
 }
