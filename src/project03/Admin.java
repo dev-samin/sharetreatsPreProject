@@ -23,6 +23,11 @@ public class Admin {
             String line = scanner.nextLine().toUpperCase();
 
             if (line.equals("END")) {
+                if (departments.size() == 0)
+                {
+                    System.out.println("1개 이상의 부서를 입력해 주세요");
+                    continue;
+                }
                 System.out.println("입력 완료");
                 return;
             }
@@ -34,6 +39,10 @@ public class Admin {
 
             String[] token = line.split(", ");
             String departmentName = token[0];
+            if (departments.containsKey(departmentName) == true) {
+                System.out.println("이미 존재하는 부서입니다");
+                continue;
+            }
             try {
                 int staffCount = Integer.parseInt(token[1]);
                 departments.put(departmentName, new Department(departmentName, staffCount));
