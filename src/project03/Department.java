@@ -13,6 +13,7 @@ public class Department {
         this.name = name;
         this.staffCount = staffCount;
         subDepartments = new ArrayList<>();
+        parentsDepartment = null;
     }
 
     public int calSubStaffCount() {
