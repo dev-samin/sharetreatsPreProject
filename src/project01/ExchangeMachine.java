@@ -16,7 +16,7 @@ public class ExchangeMachine {
     }
 
     private void greeting() {
-        System.out.println("안녕하세요 쉐어트리츠 상품교환 서비스 입니다");
+        System.out.println("안녕하세요. 쉐어트리츠 상품교환 서비스 입니다");
         help();
     }
 
@@ -81,6 +81,9 @@ public class ExchangeMachine {
         System.out.println("쿠폰확인 : CHECK [상품코드]");
         System.out.println("도움말 : HELP [상품코드]");
         System.out.println("쿠폰사용 : CLAIM [상점코드] [상품코드]");
+        System.out.println("종료 : EXIT");
+        System.out.println();
+
     }
 
     private void claim(String[] token) {

@@ -1,6 +1,7 @@
 package project01;
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -17,11 +18,11 @@ public class Admin {
 
         System.out.println("관리자용 상품코드 입력 프로그램입니다");
         System.out.println("9개의 숫자로 이루어진 상품코드를 입력해 주세요");
-        System.out.println("모든 입력이 완료되면 END를 입력해 주세요");
+        System.out.println("모든 입력이 완료되면 EXIT를 입력해 주세요");
 
         while (true) {
-            line = scanner.nextLine();
-            if (line.equals("END")) {
+            line = scanner.nextLine().toUpperCase(Locale.ROOT);
+            if (line.equals("EXIT")) {
                 System.out.println("입력종료");
                 break;
             }
