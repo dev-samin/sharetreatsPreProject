@@ -90,7 +90,6 @@ public class ExchangeMachine {
         String storeCode = token[1];
 
         System.out.println("[------CLAIM------]");
-
         if (storeCode.matches("[a-zA-Z]+") && storeCode.length() == 6) {
             for (int i = 2; i < token.length; i++) {
                 String productCode = token[i];
@@ -103,6 +102,5 @@ public class ExchangeMachine {
             System.out.println("ERROR : 정확한 상점코드를 입력해주세요");
         }
     }
-
 }
 

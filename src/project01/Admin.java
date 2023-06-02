@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class Admin {
-    Set<String> productCodes;
+    private Set<String> productCodes;
 
     public Admin() {
         productCodes = new HashSet<>();
@@ -35,7 +35,6 @@ public class Admin {
     }
 
     public Set<String> getProductCodes() {
-
         return productCodes;
     }
 }
