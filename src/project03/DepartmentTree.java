@@ -6,7 +6,7 @@ public class DepartmentTree {
 
 
     public DepartmentTree() {
-        superDepartment = new Department("SUPER", 0  );
+        superDepartment = new Department("SUPER", 0);
     }
 
     public void inputTopDepartment(Department topDepartment) {

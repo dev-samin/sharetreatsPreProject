@@ -14,14 +14,15 @@ public class Customer {
     }
 
 
-    public boolean insertCoin(){
-        if (wallet < 100){
+    public boolean insertCoin() {
+        if (wallet < 100) {
             return false;
         }
         wallet -= 100;
         return true;
 
     }
+
     public int getWallet() {
         return wallet;
     }

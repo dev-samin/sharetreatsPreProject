@@ -29,7 +29,9 @@ public class CustomerInputTest {
     void customerInputTest01() {
 //        [고객의 입력]
 //        1. 문자열은 0~9, a~z, A~Z, SPACE 까지의 문자를 무작위로 입력할 수 있습니다.
-        String command = "!!!!!!! !!!! !!!!!\nEXIT\n";
+        String command =
+                "!!!!!!! !!!! !!!!!\n" +
+                        "EXIT\n";
         ExchangeMachine machine = new ExchangeMachine(productCodes);
         InputStream in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
@@ -40,10 +42,11 @@ public class CustomerInputTest {
     void customerInputTest02() {
 //        [고객의 입력]
 //        2. 문자열의 길이는 최대 30글자까지 입력할 것입니다.
-        String command = "                                       HELP\n" +
-                "CHECK 000000000 111111111 222222222\n" +
-                "CLAIM STORE 111111111 222222222\n" +
-                "EXIT";
+        String command =
+                "                                       HELP\n" +
+                        "CHECK 000000000 111111111 222222222\n" +
+                        "CLAIM STORE 111111111 222222222\n" +
+                        "EXIT";
         ExchangeMachine machine = new ExchangeMachine(productCodes);
         InputStream in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);

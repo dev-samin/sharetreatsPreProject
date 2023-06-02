@@ -23,8 +23,7 @@ public class Admin {
             String line = scanner.nextLine().toUpperCase();
 
             if (line.equals("END")) {
-                if (departments.size() == 0)
-                {
+                if (departments.size() == 0) {
                     System.out.println("1개 이상의 부서를 입력해 주세요");
                     continue;
                 }
