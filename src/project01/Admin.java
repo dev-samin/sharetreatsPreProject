@@ -11,8 +11,6 @@ public class Admin {
         productCodes = new HashSet<>();
     }
 
-
-
     public void inputProductCodes() {
         Scanner scanner = new Scanner(System.in);
         String line;
@@ -28,7 +26,7 @@ public class Admin {
                 break;
             }
             if (line.matches("[0-9]+") == false || line.length() != 9) {
-                System.out.println("상품 코드는 0~9 자연수 글자로 이루어져 있으며 9문자로 이루어져야 합니다.");
+                System.out.println("ERROR : 상품 코드는 0~9 자연수 글자로 이루어져 있으며 9문자로 이루어져야 합니다.");
                 continue;
             }
             productCodes.add(line);

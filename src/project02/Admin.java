@@ -23,27 +23,27 @@ public class Admin {
                 if (products.size() >= 2) {
                     break;
                 }
-                System.out.println("A, B 등급의 상품은 최소 2종류 이상 준비해야 합니다.");
+                System.out.println("ERROR : A, B 등급의 상품은 최소 2종류 이상 준비해야 합니다.");
                 continue;
             }
 
             String[] token = line.split(", ");
 
             if (token.length != 3) {
-                System.out.println("!!형식이 잘못 되었습니다!!");
+                System.out.println("ERROR : 형식이 잘못 되었습니다");
                 help();
                 continue;
             }
 
             if (token[1].equals("A") == false &&
                     token[1].equals("B") == false) {
-                System.out.println("잘못된 등급이 입력되었습니다. A 또는 B 등금만 입력해주세요.");
+                System.out.println("ERROR : 잘못된 등급이 입력되었습니다. A 또는 B 등금만 입력해주세요.");
                 help();
                 continue;
             }
 
             if (isValidDateFormat(token[2]) == false) {
-                System.out.println("유통기한 형식이 잘못되었습니다 입력되었습니다 " + token[2]);
+                System.out.println("ERROR : 유통기한 형식이 잘못되었습니다 입력되었습니다 " + token[2]);
                 help();
                 continue;
             }
@@ -51,6 +51,7 @@ public class Admin {
             products.add(product);
         }
     }
+
     private void greeting() {
         System.out.println("[빠칭코 상풍등록 시스템]");
         System.out.println();
@@ -60,8 +61,8 @@ public class Admin {
 
     private void help() {
         System.out.println("[상품정보 형식 도움말]");
-        System.out.println("상풍명, 등급(A 또는 B), 유통기한");
-        System.out.println("CHICKEN, A, 2024-03-23T02:20:19+09:00");
+        System.out.println("상풍명, 등급(A 또는 B), 유통기한  | 예시 :  CHICKEN, A, 2024-03-23T02:20:19+09:00");
+        System.out.println("END : 종료");
         System.out.println();
     }
 

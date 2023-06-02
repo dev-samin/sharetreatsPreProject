@@ -1,22 +1,22 @@
 package project02;
 
 public class Product {
-    private String type;
+    private String productName;
     private String grade;
     private String expirationDate;
 
-    public Product(String type, String grade, String expirationDate){
-        this.type = type;
+    public Product(String productName, String grade, String expirationDate) {
+        this.productName = productName;
         this.grade = grade;
         this.expirationDate = expirationDate;
     }
 
-    public String getType() {
-        return type;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getGrade() {

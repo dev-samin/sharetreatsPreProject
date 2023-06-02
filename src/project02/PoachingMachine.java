@@ -22,6 +22,7 @@ public class PoachingMachine {
         sortProductType();
         command();
     }
+
     private void greeting() {
         System.out.println("[빠칭코 상품 뽑기 서비스]");
         System.out.println("명령어를 입력해주세요");
@@ -58,33 +59,33 @@ public class PoachingMachine {
             switch (command) {
                 case "DRAW" -> {
                     if (token.length != 2) {
-                        System.out.println("시행 횟수를 입력해 주세요");
+                        System.out.println("ERROR : 시행 횟수를 입력해 주세요");
                         continue;
                     }
                     try {
                         int count = Integer.parseInt(token[1]);
                         draw(count, currentDateTime);
                     } catch (NumberFormatException e) {
-                        System.out.println("2147483647 이하의 숫자만 입력해 주세요.");
+                        System.out.println("ERROR : 2147483647 이하의 숫자만 입력해 주세요.");
                     }
                 }
                 case "INSERT" -> {
                     if (token.length != 2) {
-                        System.out.println("충전 금액을 입력해 주세요");
+                        System.out.println("ERROR : 충전 금액을 입력해 주세요");
                         continue;
                     }
                     try {
                         int money = Integer.parseInt(token[1]);
                         chargeWallet(money);
                     } catch (NumberFormatException e) {
-                        System.out.println("2147483647 이하의 숫자만 입력해 주세요.");
+                        System.out.println("ERROR : 2147483647 이하의 숫자만 입력해 주세요.");
                     }
                 }
                 case "EXIT" -> {
                     scanner.close();
                     return;
                 }
-                default -> System.out.println("존재하지 않는 명령어 입니다.");
+                default -> System.out.println("ERROR : 존재하지 않는 명령어 입니다.");
             }
         }
     }
@@ -93,12 +94,12 @@ public class PoachingMachine {
     private void draw(int count, LocalDateTime currentDateTime) {
         for (int i = 0; i < count; i++) {
             if (customer.insertCoin() == false) {
-                System.out.println("잔액이 부족합니다.");
+                System.out.println("ERROR : 잔액이 부족합니다.");
                 return;
             }
 
             if (productTypeA.size() == 0 && productTypeB.size() == 0) {
-                System.out.println("재고가 부족합니다");
+                System.out.println("ERROR : 재고가 부족합니다");
                 refund();
                 return;
             }
@@ -108,7 +109,7 @@ public class PoachingMachine {
             }
 
             if (customer.getProductTypeB().size() >= 3) {
-                System.out.println("B 상품은 최대 3번까지만 당첨 될수 있습니다.");
+                System.out.println("B등급 상품은 최대 3번까지만 당첨 될수 있습니다.");
                 refund();
                 continue;
             }
@@ -141,11 +142,11 @@ public class PoachingMachine {
             return true;
         }
 
-        if (product.getType() == "A")
+        if (product.getGrade().equals("A"))
             customer.getProductTypeA().add(product);
-        if (product.getType() == "B")
+        if (product.getGrade().equals("B"))
             customer.getProductTypeB().add(product);
-        System.out.println(product.getType() + " 당첨 되었습니다.");
+        System.out.println(product.getProductName() + " 당첨 되었습니다.");
         return true;
     }
 
@@ -153,7 +154,7 @@ public class PoachingMachine {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         LocalDateTime compareDateTime = LocalDateTime.parse(date, formatter);
 
-        if (currentDateTime.isAfter (compareDateTime) == false) {
+        if (currentDateTime.isAfter(compareDateTime) == false) {
             return (false);
         }
         return (true);
@@ -162,6 +163,7 @@ public class PoachingMachine {
     private void chargeWallet(int money) {
         int currentWallet = customer.getWallet();
         customer.setWallet(currentWallet + money);
+        System.out.println(money + " 원이 충전 되었습니다.");
     }
 
     private void refund() {

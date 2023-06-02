@@ -1,4 +1,5 @@
 package project03;
+
 public class StaffCountMachine {
     DepartmentTree departmentTree;
 
@@ -14,6 +15,6 @@ public class StaffCountMachine {
     private void printResult() {
         Department topDepartment = departmentTree.getTopDepartment();
         int total = topDepartment.calSubStaffCount();
-        System.out.println("최상위 부서 " + topDepartment.getName() + "의 총인원은 " + ", " + total + " 명 입니다");
+        System.out.println("최상위 부서 " + topDepartment.getName() + "의 총인원은 " + total + " 명 입니다");
     }
 }

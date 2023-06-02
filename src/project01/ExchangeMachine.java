@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class ExchangeMachine {
-    Set<String> productCodes;
+    private Set<String> productCodes;
 
     ExchangeMachine(Set<String> productCodes) {
         this.productCodes = productCodes;
@@ -28,18 +28,18 @@ public class ExchangeMachine {
             String input = scanner.nextLine();
 
             if (input.length() > 30) {
-                System.out.println("최대 30글자까지 입력 할수 있습니다.");
+                System.out.println("ERROR : 최대 30글자까지 입력 할수 있습니다.");
                 continue;
             }
 
             if (input.matches("[a-zA-Z0-9\\s]+") == false) {
-                System.out.println("문자와 숫자 공백만 입력해 주세요");
+                System.out.println("ERROR : 문자와 숫자 공백만 입력해 주세요");
                 continue;
             }
 
             String[] token = input.split(" ");
             if (token.length == 0) {
-                System.out.println("입력된 문자가 없어요");
+                System.out.println("ERROR : 입력된 문자가 없어요");
                 continue;
             }
 
@@ -52,7 +52,7 @@ public class ExchangeMachine {
                     scanner.close();
                     return;
                 }
-                default -> System.out.println("존재하지 않는 명령어 입니다");
+                default -> System.out.println("ERROR : 존재하지 않는 명령어 입니다");
             }
         }
     }
@@ -62,7 +62,7 @@ public class ExchangeMachine {
             System.out.println(productCode + "은 사용가능한 상품코드입니다");
             return true;
         } else {
-            System.out.println(productCode + "는 존재하지 않는 상품코드입니다");
+            System.out.println("ERROR : " + productCode + "는 존재하지 않는 상품코드입니다");
             return false;
         }
     }
@@ -97,7 +97,7 @@ public class ExchangeMachine {
                 }
             }
         } else {
-            System.out.println("정확한 상점코드를 입력해주세요");
+            System.out.println("ERROR : 정확한 상점코드를 입력해주세요");
         }
     }
 
