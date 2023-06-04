@@ -1,4 +1,0 @@
-* > AS
-AS > DEV
-QA > DEV
-END
