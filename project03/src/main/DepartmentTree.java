@@ -21,7 +21,7 @@ public class DepartmentTree {
 
     public void inputDepartment(Department parents, Department child) {
         if (child.getParentsDepartment() != null) {
-            System.out.println("이미 상위부서가 존재합니다.");
+            System.out.println("ERROR: 이미 상위부서가 존재합니다.");
             return;
         }
         parents.getSubDepartments().add(child);
@@ -36,7 +36,7 @@ public class DepartmentTree {
         Department parentsDepartment = department.getParentsDepartment();
 
         if (superDepartment.getSubDepartments().size() > 1) {
-            System.out.println("최상위 부서는 1개만 입력할수 있습니다.");
+            System.out.println("ERROR: 최상위 부서는 1개만 입력할수 있습니다.");
             return false;
         }
 
@@ -50,7 +50,7 @@ public class DepartmentTree {
             }
 
             if (parentsDepartment == department) {
-                System.out.println("상위 부서의 상위부서가 될수 없습니다");
+                System.out.println("ERROR: 상위 부서의 상위부서가 될수 없습니다");
                 return false;
             }
             parentsDepartment = parentsDepartment.getParentsDepartment();

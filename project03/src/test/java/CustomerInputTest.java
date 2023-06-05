@@ -15,7 +15,7 @@ public class CustomerInputTest {
                 "A, 10\n" +
                 "B, 20\n" +
                 "C, 99\n" +
-                "END";
+                "EXIT";
         InputStream in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
 
@@ -26,7 +26,7 @@ public class CustomerInputTest {
                 "* > A\n" +
                 "A > B\n" +
                 "A > C\n" +
-                "END";
+                "EXIT";
         in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
         admin.inputDepartmentStruct();
@@ -43,7 +43,7 @@ public class CustomerInputTest {
                 "123, 123\n" +
                 ",123\n" +
                 "A, 10\n" +
-                "END";
+                "EXIT";
         InputStream in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
 
@@ -58,7 +58,7 @@ public class CustomerInputTest {
         String command =
                 "AS, 1001\n" +
                 "A, 10\n" +
-                "END";
+                "EXIT";
         InputStream in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
 
@@ -69,12 +69,12 @@ public class CustomerInputTest {
     @Test
     void customerInputTest04() {
 //        [ 고객의 입력 ]
-//        3. 인원수는 최소 0명에서 1000명의 범위입니다.
+//        4. 부서간의 관계는 ">" 로 표시됩니다. 
         String command =
                 "AS, 10\n" +
                 "DEV, 20\n" +
                 "QA, 99\n" +
-                "END";
+                "EXIT";
         InputStream in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
 
@@ -83,7 +83,7 @@ public class CustomerInputTest {
         command =
                 "AS < *\n" +
                 "* > AS\n" +
-                "END";
+                "EXIT";
         in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
         admin.inputDepartmentStruct();
@@ -99,7 +99,7 @@ public class CustomerInputTest {
                 "AS, 10\n" +
                 "DEV, 20\n" +
                 "QA, 99\n" +
-                "END";
+                "EXIT";
         InputStream in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
 
@@ -110,7 +110,7 @@ public class CustomerInputTest {
                 "* > AS\n" +
                 "DEV > AS\n" +
                 "* > DEV\n" +
-                "END";
+                "EXIT";
         in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
         admin.inputDepartmentStruct();
@@ -118,11 +118,14 @@ public class CustomerInputTest {
 
     @Test
     void customerInputTest06() {
+//      [ 고객의 입력 ] 
+//      6. 1개의 하위 부서는 1개의 상위 부서만을 가질 수 있습니다.
+
         String command =
                 "AS, 10\n" +
                         "DEV, 20\n" +
                         "QA, 99\n" +
-                        "END";
+                        "EXIT";
         InputStream in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
 
@@ -133,7 +136,7 @@ public class CustomerInputTest {
                 "* > AS\n" +
                 "AS > DEV\n" +
                 "QA > DEV\n" +
-                "END\n";
+                "EXIT\n";
         in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
         admin.inputDepartmentStruct();

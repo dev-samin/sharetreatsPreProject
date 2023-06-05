@@ -19,7 +19,7 @@ public class Admin {
         greeting();
         while (true) {
             String line = scanner.nextLine();
-            if (line.equals("END")) {
+            if (line.equals("EXIT")) {
                 if (products.size() >= 2) {
                     break;
                 }
@@ -62,7 +62,7 @@ public class Admin {
     private void help() {
         System.out.println("[상품정보 형식 도움말]");
         System.out.println("상풍명, 등급(A 또는 B), 유통기한  | 예시 :  CHICKEN, A, 2024-03-23T02:20:19+09:00");
-        System.out.println("END : 종료");
+        System.out.println("EXIT : 종료");
         System.out.println();
     }
 

@@ -153,16 +153,16 @@ class BusinessTeamTest {
                 "Cider, A, 2024-02-10T02:28:56+09:00\n" +
                         "Sauces, B, 2024-02-10T02:28:56+09:00\n" +
                         "CHICKEN, C, 2023-03-23T02:20:19+09:00\n" +
-                        "END";
+                        "EXIT";
         InputStream in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
         Admin admin = new Admin();
         admin.inputProductCodes();
     }
-
     @Test
     void businessTeamTest08HappyCase() {
-
+//      [비즈니스팀 요구사항]
+//      8. A 상품은 90%의 확률, B 상품은 10%의 확률로 뽑힙니다.
     }
 
     @Test
@@ -221,10 +221,10 @@ class BusinessTeamTest {
 //        [비즈니스팀 요구사항]
 //        11. A, B 등급의 상품은 최소 2종류 이상 준비합니다.
         String command =
-                "END\n" +
+                "EXIT\n" +
                         "Cider, A, 2024-02-10T02:28:56+09:00\n" +
                         "Sauces, B, 2024-02-10T02:28:56+09:00\n" +
-                        "END";
+                        "EXIT";
         InputStream in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
 

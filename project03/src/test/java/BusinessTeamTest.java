@@ -16,16 +16,12 @@ public class BusinessTeamTest {
                         "AS, 10\n" +
                         "DEV, 20\n" +
                         "QA, 99\n" +
-                        "END";
+                        "EXIT";
         InputStream in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
 
         Admin admin = new Admin();
         admin.inputDepartmentInfo();
-//        admin.inputDepartmentStruct();
-//
-//        StaffCountMachine machine = new StaffCountMachine(admin.getDepartmentTree());
-//        machine.run();
     }
 
     @Test
@@ -33,11 +29,11 @@ public class BusinessTeamTest {
 //        [ 비지니스 팀 요구사항 ]
 //      1. 회사내의 각 부서는 1개 이상입니다.
         String command =
-                "END\n" +
+                "EXIT\n" +
                 "AS, 10\n" +
                 "AS, 10\n" +
                 "QA, 99\n" +
-                "END";
+                "EXIT";
         InputStream in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
 
@@ -54,7 +50,7 @@ public class BusinessTeamTest {
                 "A, 10\n" +
                 "B, 20\n" +
                 "C, 99\n" +
-                "END";
+                "EXIT";
         InputStream in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
 
@@ -65,7 +61,7 @@ public class BusinessTeamTest {
                 "* > A\n" +
                 "A > B\n" +
                 "A > C\n" +
-                "END";
+                "EXIT";
         in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
         admin.inputDepartmentStruct();
@@ -89,7 +85,7 @@ public class BusinessTeamTest {
                 "AS, 10\n" +
                 "DEV, 20\n" +
                 "QA, 99\n" +
-                "END";
+                "EXIT";
         InputStream in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
 
@@ -100,7 +96,7 @@ public class BusinessTeamTest {
                 "* > AS\n" +
                 "AS > DEV\n" +
                 "DEV > QA\n" +
-                "END";
+                "EXIT";
         in = new ByteArrayInputStream(command.getBytes());
         System.setIn(in);
         admin.inputDepartmentStruct();
