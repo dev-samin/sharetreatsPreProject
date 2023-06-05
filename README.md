@@ -198,7 +198,6 @@ AS, 10
 DEV, 20  
 QA, 99  
 EXIT  
-
 EXIT ("ERROR: 최상위 부서가 입력되지 않았습니다." 메세지 출력)
 \* > AS  
 AS > DEV  
